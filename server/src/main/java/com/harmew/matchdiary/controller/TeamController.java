@@ -1,11 +1,20 @@
 package com.harmew.matchdiary.controller;
 
+import com.harmew.matchdiary.dto.team.TeamResponseDTO;
 import com.harmew.matchdiary.model.Team;
+import com.harmew.matchdiary.service.TeamService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/team")
 public class TeamController {
+
+    public final TeamService service;
+
+    public TeamController(TeamService service) {
+        this.service = service;
+    }
 
     @GetMapping("/all")
     public String getAllTeams() {
@@ -13,8 +22,8 @@ public class TeamController {
     }
 
     @GetMapping("/{id}")
-    public String getTeamById(@PathVariable("id") Integer id) {
-        return "" + id;
+    public ResponseEntity<TeamResponseDTO> getTeamById(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(service.getTeamById(id));
     }
 
     @PostMapping()
