@@ -20,12 +20,12 @@ CREATE TABLE tb_team
 # CREATE TABLE MATCH
 CREATE TABLE tb_match
 (
-    id             INTEGER PRIMARY KEY AUTO_INCREMENT,
-    date           DATETIME NOT NULL,
-    team_one_id    INTEGER  NOT NULL REFERENCES tb_team (id) ON UPDATE CASCADE ON DELETE NO ACTION,
-    score_team_one INTEGER  NOT NULL,
-    team_two_id    INTEGER  NOT NULL REFERENCES tb_team (id) ON UPDATE CASCADE ON DELETE NO ACTION,
-    score_team_two INTEGER  NOT NULL,
-    team_supported INTEGER  NOT NULL REFERENCES tb_team (id) ON UPDATE CASCADE ON DELETE NO ACTION,
+    id                INTEGER PRIMARY KEY AUTO_INCREMENT,
+    date              DATETIME NOT NULL,
+    team_one_id       INTEGER  NOT NULL REFERENCES tb_team (id) ON UPDATE CASCADE ON DELETE NO ACTION,
+    score_team_one    INTEGER  NOT NULL,
+    team_two_id       INTEGER  NOT NULL REFERENCES tb_team (id) ON UPDATE CASCADE ON DELETE NO ACTION,
+    score_team_two    INTEGER  NOT NULL,
+    team_supported_id INTEGER  NOT NULL REFERENCES tb_team (id) ON UPDATE CASCADE ON DELETE NO ACTION,
     UNIQUE (date, team_one_id, team_two_id)
 );
