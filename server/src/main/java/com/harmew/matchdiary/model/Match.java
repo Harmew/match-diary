@@ -1,9 +1,11 @@
 package com.harmew.matchdiary.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.harmew.matchdiary.dto.match.MatchRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 @Entity(name = "match")
@@ -13,7 +15,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Match {
+public class Match implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,5 +44,14 @@ public class Match {
     @JsonManagedReference
     @JoinColumn(name = "team_supported_id")
     private Team supportedTeam;
+
+    public Match(MatchRequestDTO data, Team teamOne, Team teamTwo, Team supportedTeam) {
+        this.date = data.date();
+        this.scoreTeamOne = data.scoreTeamOne();
+        this.scoreTeamTwo = data.scoreTeamTwo();
+        this.teamOne = teamOne;
+        this.teamTwo = teamTwo;
+        this.supportedTeam = supportedTeam;
+    }
 
 }
