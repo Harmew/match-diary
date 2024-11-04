@@ -40,6 +40,10 @@ public class MatchServiceImpl implements MatchService {
             return null;
         }
 
+        if (data.teamOneId().equals(data.teamTwoId())) {
+            return null;
+        }
+
         Team teamOne = teamRepository.findById(data.teamOneId()).orElseThrow(() -> new RuntimeException("Error teamOne not find"));
         Team teamTwo = teamRepository.findById(data.teamTwoId()).orElseThrow(() -> new RuntimeException("Error teamTwo not find"));
         Team supportedTeam = teamRepository.findById(data.supportedTeamId()).orElseThrow(() -> new RuntimeException("Error supportedTeam not find"));
